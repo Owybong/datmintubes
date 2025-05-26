@@ -8,15 +8,12 @@ st.set_page_config(page_title="Non-Central Revenue Dashboard", layout="wide")
 st.title("🏙️ Non-Central Revenue Performance Dashboard")
 st.markdown("Analyze revenue potential and identify high-performing areas in non-central regions.")
 
-# 📂 Load your static dataset here
 df = pd.read_csv("unsupervised(elian).csv")
 
-# Load encoders and model
 le_room = joblib.load("le_room.pkl")
 le_region = joblib.load("le_region.pkl")
 model = joblib.load("revenue_classifier.pkl")
 
-# Preprocess
 df["room_type_encoded"] = le_room.transform(df["room_type"])
 df["neighbourhood_group_cleansed_encoded"] = le_region.transform(df["neighbourhood_group_cleansed"])
 df["estimated_revenue"] = df["price"] * df["availability_365"]
